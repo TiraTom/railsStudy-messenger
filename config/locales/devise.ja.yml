@@ -7,6 +7,7 @@ ja:
         email: 'eメール'
         password: 'パスワード'
         remember_me: 'ログイン情報を記録する'
+        password_confirmation: "パスワード再入力"
   devise: 
     basic:
       log_in: 'ログイン'
@@ -16,6 +17,7 @@ ja:
       didn't_receive_confirmation_instructions: 'パスワード確認メールが届かない場合'
       didn't_receive_unlock_instructions: 'パスワード解除メールが届かない場合'
       sign_in_with: "ログイン中:"
+      agreement: "規約に同意します"
     confirmations:
       confirmed: 'アカウントを登録しました。'
       send_instructions: 'アカウントの有効化について数分以内にメールでご連絡します。'

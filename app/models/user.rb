@@ -4,6 +4,6 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
          
-  mount_uploader :thumbnail, UserThumbnailUploader
-  
+  mount_uploader :thumbnail, UserThumbnailUploader       
+         
 end

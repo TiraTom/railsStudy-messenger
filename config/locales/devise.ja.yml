@@ -18,6 +18,7 @@ ja:
       didn't_receive_unlock_instructions: 'パスワード解除メールが届かない場合'
       sign_in_with: "ログイン中:"
       agreement: "規約に同意します"
+      log_out: 'ログアウト'
     confirmations:
       confirmed: 'アカウントを登録しました。'
       send_instructions: 'アカウントの有効化について数分以内にメールでご連絡します。'

@@ -19,6 +19,9 @@ ja:
       sign_in_with: "ログイン中:"
       agreement: "規約に同意します"
       log_out: 'ログアウト'
+      send_me_reset_password_instructions: 'パスワード再設定メールを送信する'
+      change_your_password: 'パスワード変更'
+      change_my_password: 'パスワード設定'
     confirmations:
       confirmed: 'アカウントを登録しました。'
       send_instructions: 'アカウントの有効化について数分以内にメールでご連絡します。'

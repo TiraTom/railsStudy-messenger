@@ -13,6 +13,7 @@ ja:
     post: '投稿'
     cancel: '取消'
     apply: '適用'
+    Re: '返信'
   date:
     abbr_day_names:
     - 日

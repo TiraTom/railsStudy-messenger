@@ -11,7 +11,7 @@
   .actions {
     div {
       &.alert {
-        floast: left;
+        float: left;
       }
       &.post {
         float: right;
@@ -23,10 +23,15 @@
       border-radius: 5px;
       padding: 10px;
       margin-top: 20px;
+      overflow: auto;
       
       background-color: #DADADA;
       &.mine {
         background-color: #C1EFFF;
+      }
+      
+      &.reply {
+        margin-top: 0px;
       }
       
       p {
@@ -41,12 +46,15 @@
           height: auto;
         }
       }
-      .message{
+      .message {
         display: inline-block;
         margin-left: 10px;
         width: 500px;
         vertical-align: top;
         word-wrap: break-word;
+      }
+      .btn {
+        float: right;
       }
     }
   }

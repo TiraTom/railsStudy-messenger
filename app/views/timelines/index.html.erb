@@ -3,7 +3,11 @@
   <div class="input">
     <%= form_for @input_message do |f| %>
       <div class="form-group">
-        <%= f.label :message %><br />
+        <%= f.label :message %>
+        <% if @input_message.persisted? %>
+          編集中
+        <% end %>
+        <br />
         <%= f.text_area :message, class: 'form-control', rows: 3 %>
       </div>
     
@@ -16,6 +20,11 @@
           <% end %>
         </div>
         <div class="post">
+          <% if @input_message.persisted? %>
+            <%= link_to root_path do %>
+              <%= button_tag t('userdef.cancel'), class: 'btn btn-default' %>
+            <% end %>
+          <% end %>
           <%= f.submit t('userdef.post'), class: 'btn btn-primary' %>
         </div>
       </div>
@@ -33,6 +42,11 @@
           <% end %>
         </p>
         <%= simple_format t.message, class: 'message' %>
+        <% if mypost?(t) %>
+          <%= link_to root_path(id: t.id, message: t.message) do %>
+            <%= button_tag t('userdef.edit'), class: 'btn btn-info' %>
+          <% end %>
+        <% end %>
       </div>
     <% end %>
   </div>

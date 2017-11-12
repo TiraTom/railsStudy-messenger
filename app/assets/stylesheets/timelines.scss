@@ -53,6 +53,20 @@
         vertical-align: top;
         word-wrap: break-word;
       }
+      .operation {
+        display: inline-block;
+        button {
+          margin-bottom: 3px;
+        }
+        .btn {
+          width: 52px;
+        }
+/*      .button_to {
+          input.btn {
+            width: 30px;
+          }
+        }*/
+      }
       .btn {
         float: right;
       }

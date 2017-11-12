@@ -13,9 +13,12 @@
   </p>
   <%= simple_format t.message, class: 'message' %>
   <% if mypost?(t) %>
-    <%= link_to root_path(id: t.id, message: t.message) do %>
-      <%= button_tag t('userdef.edit'), class: 'btn btn-info' %>
-    <% end %>
+    <div class="operation">
+      <%= link_to root_path(id: t.id, message: t.message) do %>
+        <%= button_tag t('userdef.edit'), class: 'btn btn-info' %>
+      <% end %>
+      <%= button_to t('userdef.del'), timeline_path(t), method: :delete, class: 'btn btn-danger', data: {confirm: '削除しますか？'} %>
+    </div>
   <% else %>
     <%= link_to root_path(reply_id: t.id) do %>
       <%= button_tag t('userdef.Re'), class: 'btn btn-info' %>

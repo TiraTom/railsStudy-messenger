@@ -14,6 +14,7 @@ ja:
     cancel: '取消'
     apply: '適用'
     Re: '返信'
+    del: '削除'
   date:
     abbr_day_names:
     - 日

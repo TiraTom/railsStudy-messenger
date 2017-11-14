@@ -10,9 +10,14 @@ $(function(){
   
   $('form.input_message_form').on('ajax:complete', function(event, data, status){
     if ( status == 'success') {
-      console.info(data.responseText);
-      var json = JSON.parse(data.responseText);
-      $('div.timeline').prepend(json.timeline)
+        var json = JSON.parse(data.responseText);
+        if (json.timeline) {
+          $('div.timeline').prepend(json.timeline);
+        } else if (json.error_message) {
+          $('div.alert').prepend(json.error_message);
+        } else {
+          $('div.alert').prepend("ERROR HAPPENED");
+        }
     }
-  })
-})
+  });
+});

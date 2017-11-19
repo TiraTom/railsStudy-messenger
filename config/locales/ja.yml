@@ -16,6 +16,7 @@ ja:
     Re: '返信'
     del: '削除'
     ajaxPost: 'Ajax投稿'
+    like: 'いいね！'
   date:
     abbr_day_names:
     - 日

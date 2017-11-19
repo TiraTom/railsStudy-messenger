@@ -15,13 +15,28 @@
   <% if mypost?(t) %>
     <div class="operation">
       <%= link_to root_path(id: t.id, message: t.message) do %>
-        <%= button_tag t('userdef.edit'), class: 'btn btn-info' %>
+        <%= button_tag t('userdef.edit'), class: 'btn btn-info float-right' %>
       <% end %>
       <%= button_to t('userdef.del'), timeline_path(t), method: :delete, class: 'btn btn-danger', data: {confirm: '削除しますか？'} %>
     </div>
   <% else %>
     <%= link_to root_path(reply_id: t.id) do %>
       <%= button_tag t('userdef.Re'), class: 'btn btn-info' %>
+    <% end %>
+  <% end %>
+  <hr>
+  <span class: "like_count">
+    <%= t('userdef.like') %>：
+    <% if like_count.nil? %>
+      0
+    <% else %>
+      <% like_count %>
+    <% end %>
+  </span>
+  <% if not mypost?(t) %>
+    <%= form_for @like, url:likes_path, remote: true, html: {class: 'like_form'}, authenticity_token: true do |f| %>
+      <%= f.hidden_field :timeline_id, value: t.id %>
+      <%= f.submit t('userdef.like'), class: 'btn btn-success js-like' %>
     <% end %>
   <% end %>
 </div>

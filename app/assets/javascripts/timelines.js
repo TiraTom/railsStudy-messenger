@@ -16,8 +16,23 @@ $(function(){
         } else if (json.error_message) {
           $('div.alert').prepend(json.error_message);
         } else {
-          $('div.alert').prepend("ERROR HAPPENED");
+          $('div.alert').prepend("SYSTEM ERRORD");
         }
+    }
+  });
+  
+  $('form.like_form').on('ajax:complete', function(event, data, status){
+    if ( status == 'success') {
+      var json = JSON.parse(data.responseText);
+      if (json.like_html) {
+        $(this).prev('span').empty();
+        $(this).prev('span').prepend(json.like_html);
+        $(this).find('.js-like').addClass('invisible');
+      } else if (json.error_message) {
+        $('div.alert').prepend(json.error_message);
+      } else {
+        $('div.alert').prepend("SYSTEM ERROR");
+      }
     }
   });
 });

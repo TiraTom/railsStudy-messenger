@@ -11,4 +11,21 @@ class ApplicationController < ActionController::Base
   def configure_permitted_parameters
     devise_parameter_sanitizer.permit(:sign_up, keys: [:name, :thumbnail, :agreement])
   end
+  
+  #すべてのいいねのカウントをする
+  def count_likes
+    likes = Like.all
+    likes.group('timeline_id').count
+  end
+  #１つの投稿へのいいねのカウントをする
+  def count_like
+    count = Like.where(timeline_id: @timeline_id).count
+    if count.nil?
+      return 0
+    else
+      return count
+    end
+  end
+  
+
 end

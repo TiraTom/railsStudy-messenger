@@ -24,8 +24,8 @@ $(function(){
   $('form.like_form').on('ajax:complete', function(event, data, status){
     if ( status == 'success') {
       var json = JSON.parse(data.responseText);
-      if (json.like_html) {
-        $(this).prev('span').find('js-like_count').prepend(json.like_html);
+      if (json.new_count) {
+        $(this).prev('span').find('span').text(json.new_count)
         $(this).find('.js-like').addClass('invisible');
       } else if (json.error_message) {
         $('div.alert').prepend(json.error_message);

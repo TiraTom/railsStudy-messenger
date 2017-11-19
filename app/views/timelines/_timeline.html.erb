@@ -27,16 +27,20 @@
   <hr>
   <span class: "like_count">
     <%= t('userdef.like') %>：
-    <% if like_count.nil? %>
-      0
-    <% else %>
-      <% like_count %>
-    <% end %>
+    <span class: "js-like_count">
+      <% if @like_counts[t.id].nil? %>
+        0
+      <% else %>
+        <%= @like_counts[t.id] %>
+      <% end %>
+    </span>
   </span>
   <% if not mypost?(t) %>
-    <%= form_for @like, url:likes_path, remote: true, html: {class: 'like_form'}, authenticity_token: true do |f| %>
-      <%= f.hidden_field :timeline_id, value: t.id %>
-      <%= f.submit t('userdef.like'), class: 'btn btn-success js-like' %>
+    <% if not already_like?(t) %>
+      <%= form_for @like, url:likes_path, remote: true, html: {class: 'like_form'}, authenticity_token: true do |f| %>
+        <%= f.hidden_field :timeline_id, value: t.id %>
+        <%= f.submit t('userdef.like'), class: 'btn btn-success js-like' %>
+      <% end %>
     <% end %>
   <% end %>
 </div>

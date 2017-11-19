@@ -25,8 +25,7 @@ $(function(){
     if ( status == 'success') {
       var json = JSON.parse(data.responseText);
       if (json.like_html) {
-        $(this).prev('span').empty();
-        $(this).prev('span').prepend(json.like_html);
+        $(this).prev('span').find('js-like_count').prepend(json.like_html);
         $(this).find('.js-like').addClass('invisible');
       } else if (json.error_message) {
         $('div.alert').prepend(json.error_message);

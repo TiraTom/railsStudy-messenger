@@ -47,8 +47,8 @@
   </div>
   
   <div class="timeline">
-    <% @timeline.each do |t| %>
-      <%= render partial: 'timelines/timeline' , locals: {t: t, like: @like, like_count: @like_counts[t.id]} %>
+    <% @timeline.each do |one_timeline| %>
+      <%= render partial: 'timelines/timeline' , locals: {like: @like, timeline: one_timeline, like_count: @like_counts[one_timeline.id]} %>
     <% end %>
   </div>
 </div>

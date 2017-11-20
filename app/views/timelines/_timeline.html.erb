@@ -3,24 +3,24 @@
   is_reply = false if is_reply.nil?
 %>
 
-<div class="per <%= 'mine' if mypost?(t) %> <%= 'reply' if is_reply %>">
+<div class="per <%= 'mine' if mypost?(timeline) %> <%= 'reply' if is_reply %>">
   <p class="icon">
-    <% if t.user.thumbnail? %>
-      <%= image_tag t.user.thumbnail.url %>
+    <% if timeline.user.thumbnail? %>
+      <%= image_tag timeline.user.thumbnail.url %>
     <% else %>
       NO IMAGE
     <% end %>
   </p>
-  <%= simple_format t.message, class: 'message' %>
-  <% if mypost?(t) %>
+  <%= simple_format timeline.message, class: 'message' %>
+  <% if mypost?(timeline) %>
     <div class="operation">
-      <%= link_to root_path(id: t.id, message: t.message) do %>
+      <%= link_to root_path(id: timeline.id, message: timeline.message) do %>
         <%= button_tag t('userdef.edit'), class: 'btn btn-info float-right' %>
       <% end %>
-      <%= button_to t('userdef.del'), timeline_path(t), method: :delete, class: 'btn btn-danger', data: {confirm: '削除しますか？'} %>
+      <%= button_to t('userdef.del'), timeline_path(timeline), method: :delete, class: 'btn btn-danger', data: {confirm: '削除しますか？'} %>
     </div>
   <% else %>
-    <%= link_to root_path(reply_id: t.id) do %>
+    <%= link_to root_path(reply_id: timeline.id) do %>
       <%= button_tag t('userdef.Re'), class: 'btn btn-info' %>
     <% end %>
   <% end %>
@@ -33,13 +33,13 @@
       <% like_count %>
     <% end %>
   </span>
-  <% if not mypost?(t) %>
+  <% if not mypost?(timeline) %>
     <%= form_for @like, url:likes_path, remote: true, html: {class: 'like_form'}, authenticity_token: true do |f| %>
-      <%= f.hidden_field :timeline_id, value: t.id %>
+      <%= f.hidden_field :timeline_id, value: timeline.id %>
       <%= f.submit t('userdef.like'), class: 'btn btn-success js-like' %>
     <% end %>
   <% end %>
 </div>
-<% t.replies.each do |r| %>
-  <%= render 'timelines/timeline', t: r, is_reply: true %>
+<% timeline.replies.each do |r| %>
+  <%= render 'timelines/timeline', timeline: r, is_reply: true %>
 <% end %>

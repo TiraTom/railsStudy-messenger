@@ -60,7 +60,7 @@ class TimelinesController < ApplicationController
     redirect_to action: :index
   end
   
-  def delete
+  def destroy
     timeline = Timeline.find(params[:id])
     timeline.destroy
     redirect_to action: :index

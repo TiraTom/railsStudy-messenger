@@ -25,7 +25,7 @@ $(function(){
     if ( status == 'success') {
       var json = JSON.parse(data.responseText);
       if (json.new_count) {
-        $(this).prev('span').find('span').text(json.new_count)
+        $(this).prev('span').find('span').text(json.new_count);
         $(this).find('.js-like').addClass('invisible');
       } else if (json.error_message) {
         $('div.alert').prepend(json.error_message);

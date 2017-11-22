@@ -1,0 +1,16 @@
+// Place all the styles related to the likes controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.like_count {
+  float: left;
+}
+.like_form {
+  float: right;
+  .btn {
+    clear: both;
+  }
+  .invisible {
+    visibility: hidden
+  }
+}

@@ -10,9 +10,28 @@ $(function(){
   
   $('form.input_message_form').on('ajax:complete', function(event, data, status){
     if ( status == 'success') {
-      console.info(data.responseText);
-      var json = JSON.parse(data.responseText);
-      $('div.timeline').prepend(json.timeline)
+        var json = JSON.parse(data.responseText);
+        if (json.timeline) {
+          $('div.timeline').prepend(json.timeline);
+        } else if (json.error_message) {
+          $('div.alert').prepend(json.error_message);
+        } else {
+          $('div.alert').prepend("SYSTEM ERRORD");
+        }
     }
-  })
-})
+  });
+  
+  $('form.like_form').on('ajax:complete', function(event, data, status){
+    if ( status == 'success') {
+      var json = JSON.parse(data.responseText);
+      if (json.like_html) {
+        $(this).prev('span').find('js-like_count').prepend(json.like_html);
+        $(this).find('.js-like').addClass('invisible');
+      } else if (json.error_message) {
+        $('div.alert').prepend(json.error_message);
+      } else {
+        $('div.alert').prepend("SYSTEM ERROR");
+      }
+    }
+  });
+});

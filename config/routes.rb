@@ -1,8 +1,12 @@
 Rails.application.routes.draw do
+  get 'likes/create'
+
   root 'timelines#index'
   devise_for :users
 
-  resources :timelines do
+  resources :likes
+
+  resources :timelines , shallow: true do
     collection do
       post 'filter_by_user'
     end

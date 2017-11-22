@@ -7,7 +7,9 @@ class TimelinesController < ApplicationController
     @timeline = Timeline.includes(:user).not_reply.user_filter(params[:filter_user_id]).order('updated_at DESC')
     #ユーザ一覧取得
     @users = User.all
-    
+    @like = Like.new
+    @like_counts = count_likes
+
     if params[:reply_id]
       @reply_timeline = Timeline.find(params[:reply_id])
     end
@@ -17,17 +19,33 @@ class TimelinesController < ApplicationController
     timeline = Timeline.new
     timeline.attributes = timeline_params
     timeline.user_id = current_user.id
+    @like_counts = count_likes
     if timeline.valid?
       timeline.save!
+      respond_to do |format|
+        format.html do
+          redirect_to action: :index
+        end
+        format.json do
+          if @like_counts[timeline.id].nil?
+            count = 0
+          else
+            count = @like_counts[timeline.id]
+          end
+          html = render_to_string partial: 'timelines/timeline', layout: false, formats: :html, locals: { timeline: timeline, like_count: count }
+          render json: {timeline: html}
+        end
+      end
     else
-      flash[:alert] = timeline.errors.full_messages
-    end
-    unless request.format.json?
-      redirect_to action: :index
-    else
-      #ajaxの場合のレスポンス
-      html = render_to_string partial: 'timelines/timeline', layout: false, formats: :html, locals: {t: timeline }
-      render json: {timeline: html}
+      respond_to do |format|
+        format.html do
+          flash[:alert] = timeline.errors.full_messages
+          redirect_to action: :index
+        end
+        format.json do
+          render json: { error_message: timeline.errors.full_messages }
+        end
+      end
     end
   end
   
@@ -60,5 +78,5 @@ class TimelinesController < ApplicationController
   def timeline_params
     params.require(:timeline).permit(:message, :reply_id)
   end  
-      
+  
 end

@@ -19,6 +19,7 @@ class TimelinesController < ApplicationController
     timeline = Timeline.new
     timeline.attributes = timeline_params
     timeline.user_id = current_user.id
+    @like_counts = count_likes
     if timeline.valid?
       timeline.save!
       respond_to do |format|

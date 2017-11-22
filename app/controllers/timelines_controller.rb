@@ -9,7 +9,7 @@ class TimelinesController < ApplicationController
     @users = User.all
     @like = Like.new
     @like_counts = count_likes
-    
+
     if params[:reply_id]
       @reply_timeline = Timeline.find(params[:reply_id])
     end
@@ -32,7 +32,7 @@ class TimelinesController < ApplicationController
           else
             count = @like_counts[timeline.id]
           end
-          html = render_to_string partial: 'timelines/timeline', layout: false, formats: :html, locals: { t: timeline, like_count: count }
+          html = render_to_string partial: 'timelines/timeline', layout: false, formats: :html, locals: { timeline: timeline, like_count: count }
           render json: {timeline: html}
         end
       end

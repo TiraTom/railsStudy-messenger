@@ -25,13 +25,9 @@
     <% end %>
   <% end %>
   <hr>
-  <span class: "like_count">
+  <span class="like_count">
     <%= t('userdef.like') %>：
-    <% if like_count.nil? %>
-      0
-    <% else %>
-      <% like_count %>
-    <% end %>
+    <%= timeline.likes.count.nil? ? 0 : timeline.likes.count %>
   </span>
   <% if not mypost?(timeline) %>
     <%= form_for @like, url:likes_path, remote: true, html: {class: 'like_form'}, authenticity_token: true do |f| %>

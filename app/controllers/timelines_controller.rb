@@ -9,7 +9,7 @@ class TimelinesController < ApplicationController
     @users = User.all
     @like = Like.new
     @like_counts = count_likes
-    
+
     if params[:reply_id]
       @reply_timeline = Timeline.find(params[:reply_id])
     end

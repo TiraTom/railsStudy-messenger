@@ -32,6 +32,8 @@ class TimelinesController < ApplicationController
           else
             count = @like_counts[timeline.id]
           end
+          reply_id = timeline.reply_id
+          byebug
           html = render_to_string partial: 'timelines/timeline', layout: false, formats: :html, locals: { t: timeline, like_count: count }
           render json: {timeline: html}
         end

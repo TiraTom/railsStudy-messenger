@@ -11,7 +11,10 @@ $(function(){
   $('form.input_message_form').on('ajax:complete', function(event, data, status){
     if ( status == 'success') {
         var json = JSON.parse(data.responseText);
-        if (json.timeline) {
+        if (json.reply_id) {
+          var selecter = 'div.data-id' + json.reply_id;
+          $(selecter).append(json.timeline);
+        } else if (json.timeline) {
           $('div.timeline').prepend(json.timeline);
         } else if (json.error_message) {
           $('div.alert').prepend(json.error_message);

@@ -48,7 +48,7 @@
   
   <div class="timeline">
     <% @timeline.each do |t| %>
-      <%= render 'timelines/timeline', t: t %>
+      <%= render 'timelines/timeline' , t: t, like: @like, like_count: @like_counts[t.id] %>
     <% end %>
   </div>
 </div>

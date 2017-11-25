@@ -3,7 +3,7 @@
   is_reply = false if is_reply.nil?
 %>
 
-<div class="per <%= 'mine' if mypost?(one_timeline) %> <%= 'reply' if is_reply %>">
+<div class="per <%= 'mine' if mypost?(one_timeline) %> <%= 'reply' if is_reply %> clearfix">
   <p class="icon">
     <% if one_timeline.user.thumbnail? %>
       <%= image_tag one_timeline.user.thumbnail.url %>

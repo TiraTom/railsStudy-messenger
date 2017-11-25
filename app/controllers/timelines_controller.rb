@@ -8,8 +8,7 @@ class TimelinesController < ApplicationController
     #ユーザ一覧取得
     @users = User.all
     @like = Like.new
-    @like_counts = count_likes
-    
+
     if params[:reply_id]
       @reply_timeline = Timeline.find(params[:reply_id])
     end
@@ -19,7 +18,7 @@ class TimelinesController < ApplicationController
     timeline = Timeline.new
     timeline.attributes = timeline_params
     timeline.user_id = current_user.id
-    @like_counts = count_likes
+    @like = Like.new
     if timeline.valid?
       timeline.save!
       respond_to do |format|
@@ -27,14 +26,7 @@ class TimelinesController < ApplicationController
           redirect_to action: :index
         end
         format.json do
-          if @like_counts[timeline.id].nil?
-            count = 0
-          else
-            count = @like_counts[timeline.id]
-          end
-          reply_id = timeline.reply_id
-          byebug
-          html = render_to_string partial: 'timelines/timeline', layout: false, formats: :html, locals: { t: timeline, like_count: count }
+          html = render_to_string partial: 'timelines/timeline', layout: false, formats: :html, locals: { one_timeline: timeline }
           render json: {timeline: html}
         end
       end

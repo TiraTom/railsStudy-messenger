@@ -22,12 +22,10 @@
         </div>
         <div class="post">
           <% if @input_message.persisted? || @reply_timeline %>
-            <%= link_to root_path do %>
-              <%= button_tag t('userdef.cancel'), class: 'btn btn-default' %>
-            <% end %>
+            <%= link_to t('userdef.cancel'), root_path, class: 'btn btn-default' %>
           <% end %>
           <%= f.submit t('userdef.post'), class: 'btn btn-primary post' %>
-          <%= f.submit 'AjaxPost', class: 'btn btn-primary ajaxpost' %>
+          <%= f.submit t('userdef.ajaxPost'), class: 'btn btn-primary ajaxpost' %>
         </div>
       </div>
       <%= f.hidden_field :reply_id, value: @reply_timeline.id if @reply_timeline %>
@@ -47,8 +45,8 @@
   </div>
   
   <div class="timeline">
-    <% @timeline.each do |t| %>
-      <%= render 'timelines/timeline', t: t %>
+    <% @timeline.each do |one_timeline| %>
+      <%= render 'timelines/timeline' , one_timeline: one_timeline, like: @like %>
     <% end %>
   </div>
 </div>

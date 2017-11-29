@@ -32,6 +32,7 @@
       
       &.reply {
         margin-top: 0px;
+        border-top: 1px dashed white;
       }
       
       p {
@@ -41,6 +42,7 @@
         display: inline-block;
         width: 70px;
         vertical-align: top;
+        min-height: 60px;
         img {
           max-width: 100%;
           height: auto;
@@ -55,6 +57,7 @@
       }
       .operation {
         display: inline-block;
+        float: right;
         button {
           margin-bottom: 3px;
         }
@@ -66,6 +69,10 @@
             width: 30px;
           }
         }*/
+      }
+      hr {
+        margin-top: 20px;
+        margin-bottom: 10px;
       }
       .btn {
         float: right;

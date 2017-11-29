@@ -3,28 +3,47 @@
   is_reply = false if is_reply.nil?
 %>
 
-<div class="per <%= 'mine' if mypost?(t) %> <%= 'reply' if is_reply %>">
+<div class="per <%= 'mine' if mypost?(one_timeline) %> <%= 'reply' if is_reply %> clearfix">
   <p class="icon">
-    <% if t.user.thumbnail? %>
-      <%= image_tag t.user.thumbnail.url %>
+    <% if one_timeline.user.thumbnail? %>
+      <%= image_tag one_timeline.user.thumbnail.url %>
     <% else %>
       NO IMAGE
     <% end %>
   </p>
-  <%= simple_format t.message, class: 'message' %>
-  <% if mypost?(t) %>
+  <%= simple_format one_timeline.message, class: 'message' %>
+  <% if mypost?(one_timeline) %>
     <div class="operation">
-      <%= link_to root_path(id: t.id, message: t.message) do %>
-        <%= button_tag t('userdef.edit'), class: 'btn btn-info' %>
+      <%= link_to root_path(id: one_timeline.id, message: one_timeline.message) do %>
+        <%= button_tag t('userdef.edit'), class: 'btn btn-info float-right' %>
       <% end %>
-      <%= button_to t('userdef.del'), timeline_path(t), method: :delete, class: 'btn btn-danger', data: {confirm: '削除しますか？'} %>
+      <%= button_to t('userdef.del'), timeline_path(one_timeline), method: :delete, class: 'btn btn-danger', data: {confirm: '削除しますか？'} %>
     </div>
   <% else %>
-    <%= link_to root_path(reply_id: t.id) do %>
+    <%= link_to root_path(reply_id: one_timeline.id) do %>
       <%= button_tag t('userdef.Re'), class: 'btn btn-info' %>
     <% end %>
   <% end %>
+  <hr>
+  <span class: "like_count">
+    <%= t('userdef.like') %>：
+    <span class: "js-like_count">
+      <% if one_timeline.likes.count.nil? %>
+        0
+      <% else %>
+        <%= one_timeline.likes.count %>
+      <% end %>
+    </span>
+  </span>
+  <% if not mypost?(one_timeline) %>
+    <% if not already_like?(one_timeline) %>
+      <%= form_for @like, url:likes_path, remote: true, html: {class: 'like_form'}, authenticity_token: true do |f| %>
+        <%= f.hidden_field :timeline_id, value: one_timeline.id %>
+        <%= f.submit t('userdef.like'), class: 'btn btn-success js-like' %>
+      <% end %>
+    <% end %>
+  <% end %>
 </div>
-<% t.replies.each do |r| %>
-  <%= render 'timelines/timeline', t: r, is_reply: true %>
+<% one_timeline.replies.each do |r| %>
+  <%= render 'timelines/timeline', one_timeline: r, is_reply: true %>
 <% end %>
